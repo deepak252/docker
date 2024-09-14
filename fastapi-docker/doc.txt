@@ -1,9 +1,12 @@
-1. Create Virtual Environment : 
+1. Create Virtual Environment ( A virtual environment isolates your project's dependencies from other Python projects, ensuring that you can manage dependencies more effectively and avoid version conflicts.): 
     python -m venv .venv
-2. Activate Virtual Environment :
+2. Activate Virtual Environment (Activating the virtual environment ensures that the Python interpreter and packages used are those within the .venv folder.) :
     source .venv/bin/activate
 3. Install dependencies : 
-    pip install fastapi
-    pip install uvicorn
-4. Run 
+    pip install fastapi      # main framework for building your web application.
+    pip install uvicorn      # Uvicorn is an ASGI server that runs your FastAPI application.
+4. Run (runs your FastAPI application using Uvicorn )
     > uvicorn main:app
+
+5. Freeze dependencies to requirements.txt (This command takes a snapshot of all the installed packages (and their versions) in your virtual environment and writes them to a requirements.txt file. This file can be used later to reproduce the environment (e.g., in production or on another machine) by running "pip install -r requirements.txt")
+    pip freeze > requirements.txt
