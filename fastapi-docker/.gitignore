@@ -20,6 +20,3 @@ logs/
 # Dependency files
 poetry.lock
 pip-wheel-metadata/
-
-# Docker
-Dockerfile
