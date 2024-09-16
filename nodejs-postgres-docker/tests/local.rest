@@ -1,0 +1,19 @@
+@baseUrl = http://127.0.0.1:8000
+
+GET {{baseUrl}}/setup
+
+###
+
+GET {{baseUrl}}
+
+
+###
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Deepak",
+    "location": "New Delhi"
+}
+

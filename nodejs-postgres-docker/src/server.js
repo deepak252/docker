@@ -10,24 +10,28 @@ app.get('/', async (req, res)=>{
         const data = await db.query('SELECT * FROM schools')
         res.status(200).json({
             message: "Successfully fetched data",
-            data
+            data: data.rows
         })
     }catch(e){
         console.log(e);
-        res.sendStatus(500)
+        res.status(500).json({
+            message: e.message || 'Internal Server Error'
+        })
     }
 })
 
 app.post('/', async (req, res)=>{
     const {name, location} = req.body;
     try{
-        await db.query('INSERT INTO schools (name, address) VALUES ($1, $e)', [name, location])
+        await db.query('INSERT INTO schools (name, address) VALUES ($1, $2)', [name, location])
         res.status(200).json({
             message: "Successfully added child"
         })
     }catch(e){
         console.log(e);
-        res.sendStatus(500)
+        res.status(500).json({
+            message: e.message || 'Internal Server Error'
+        })
     }
 })
 
@@ -39,7 +43,9 @@ app.get('/setup', async (req, res)=>{
         })
     }catch(e){
         console.log(e);
-        res.sendStatus(500)
+        res.status(500).json({
+            message: e.message || 'Internal Server Error'
+        })
     }
 })
 app.listen(PORT, ()=>{
