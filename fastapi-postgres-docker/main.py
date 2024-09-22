@@ -5,5 +5,5 @@ app = FastAPI()
 @app.get('/')
 def index():    
     return {
-        'message': 'Welcome to the Fastapi Server'
+        'message': 'Welcome to the Fastapi Server2'
     }
