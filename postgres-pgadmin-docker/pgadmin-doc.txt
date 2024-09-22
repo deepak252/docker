@@ -1,0 +1,15 @@
+Start Docker Compose to run the postgres_container and pgadmin_container.
+Access pgAdmin by going to http://localhost:5050 in your browser.
+    Login using:
+        Email: admin@gmail.com
+        Password: admin
+
+Add a New Server in pgAdmin:
+    Name: PostgreSQL
+    Host: db (Docker service name for PostgreSQL)
+    Port: 5432
+    Username: root
+    Password: root
+    Database: test_db
+Save and pgAdmin will connect to the PostgreSQL database.
+
