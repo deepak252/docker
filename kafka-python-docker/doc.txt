@@ -18,3 +18,16 @@ bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 -
 eg. my-topic:0:15
     my-topic:1:20
     // This indicates that for my-topic, partition 0 has a latest offset of 15, and partition 1 has a latest offset of 20.
+
+
+// List all consumer groups:
+bin/kafka-consumer-groups.sh --list --bootstrap-server localhost:9092
+
+//Describe a consumer group:
+bin/kafka-consumer-groups.sh --describe --group my-group --bootstrap-server localhost:9092
+
+//Delete a consumer group:
+bin/kafka-consumer-groups.sh --delete --group consumer-group-a --bootstrap-server localhost:9092
+
+
+
