@@ -1,0 +1,4 @@
+Multiple Producer & Multiple Consumer
+1. Kafka cluster stores messages even if they were already consumed by one of the consumers.
+2. Same messages may be read multiple times by different consumers.
+3. Multiple consumers can read message from Kafka Topic in parallel.

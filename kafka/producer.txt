@@ -1,0 +1,2 @@
+# Start the producer: 
+bin/kafka-console-producer.sh --topic mytopic1 --bootstrap-server localhost:9092

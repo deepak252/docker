@@ -1,0 +1,12 @@
+# Create a topic:
+bin/kafka-topics.sh --create --topic mytopic1 --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+
+# Delete a topic:
+bin/kafka-topics.sh --delete --topic mytopic1 --bootstrap-server localhost:9092
+
+# List all topics:
+bin/kafka-topics.sh --list --bootstrap-server localhost:9092     
+
+# Describe a topic 
+bin/kafka-topics.sh --describe --topic mytopic1 --bootstrap-server localhost:9092
+

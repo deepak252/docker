@@ -1,0 +1,62 @@
+### Install and run Apache Kafka & integration with Python using Kafka-Python
+
+Set up Kafka --
+
+Create 2 folders in F drive--
+kafka_logs --> zookeeper
+kafka_logs --> server_logs
+
+Change the zookeeper.properties:
+------------------------------------------------------
+dataDir=/Users/deepak/Documents/kafka_logs/zookeeper
+maxClientCnxns=1
+
+This property limits the number of active connections from a host, specified by IP address, to a single ZooKeeper server.
+
+Change the server.properties:
+----------------------------------------------------
+uncomment listeners
+log.dirs=/Users/deepak/Documents/kafka_logs/server_logs
+zookeeper.connect=localhost:2181
+zookeeper.connection.timeout.ms=60000
+
+Start Zookeeper:
+---------------------------------------
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Start Kafka-server:
+-----------------------------------------
+bin/kafka-server-start.sh config/server.properties
+
+Create topic:
+------------------------------------
+bin/kafka-topics.sh --create --topic mytopic1 --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+
+Start Producer:
+--------------------------------------
+bin/kafka-console-producer.sh --topic mytopic1 --bootstrap-server localhost:9092
+
+Start Consumer:
+-------------------------------------
+bin/kafka-console-consumer.sh --topic mytopic1 --from-beginning --bootstrap-server localhost:9092
+
+kafka-python installation:
+--------------------------------------------------
+pip install kafka-python
+(To know more about this client , you can refer this link :
+https://pypi.org/project/kafka-python/)
+
+Python Code:
+----------------------------------
+from time import sleep
+from json import dumps
+from kafka import KafkaProducer
+
+topic_name='hello_world'
+producer = KafkaProducer(bootstrap_servers=['localhost:9092'],value_serializer=lambda x: dumps(x).encode('utf-8'))
+
+for e in range(1000):
+    data = {'number' : e}
+    print(data)
+    producer.send(topic_name, value=data)
+    sleep(5)

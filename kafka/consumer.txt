@@ -1,0 +1,2 @@
+# Start the Consumer: 
+bin/kafka-console-consumer.sh --topic mytopic1 --from-beginning --bootstrap-server localhost:9092

@@ -1,0 +1,19 @@
+Change the zookeeper.properties:
+------------------------------------------------------
+dataDir=/Users/deepak/Documents/kafka_logs/zookeeper
+maxClientCnxns=1
+
+This property limits the number of active connections from a host, specified by IP address, to a single ZooKeeper server.
+
+Change the server.properties:
+----------------------------------------------------
+uncomment listeners - listeners=PLAINTEXT://:9092
+log.dirs=/Users/deepak/Documents/kafka_logs/server_logs
+zookeeper.connect=localhost:2181
+zookeeper.connection.timeout.ms=60000
+
+1. Start Zookeepr:
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+2. Start Kafka Server:
+bin/kafka-server-start.sh config/server.properties
