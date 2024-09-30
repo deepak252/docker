@@ -2,3 +2,7 @@ Multiple Producer & Multiple Consumer
 1. Kafka cluster stores messages even if they were already consumed by one of the consumers.
 2. Same messages may be read multiple times by different consumers.
 3. Multiple consumers can read message from Kafka Topic in parallel.
+
+Topics, Partions, and Offsets
+1. Whenever we are having multiple partitions in a topic, then consumption of messages will not be happening in same order
+

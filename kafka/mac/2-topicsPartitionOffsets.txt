@@ -1,0 +1,35 @@
+NOTE: Starting with kafka 2.4, the default partitioner was changed from round-robin to sticky, 
+https://stackoverflow.com/questions/74900130/kafka-is-not-sending-messages-to-other-partitions
+https://www.confluent.io/blog/apache-kafka-producer-improvements-sticky-partitioner/
+
+Start Zookeeper:
+---------------------------
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Start Kafka-server:
+-----------------------------
+bin/kafka-server-start.sh config/server.properties
+
+Create a topic:
+-------------------------
+bin/kafka-topics.sh --create --topic mytopic1 --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+
+Start Producer:
+--------------------------
+bin/kafka-console-producer.sh --topic mytopic1 --bootstrap-server localhost:9092
+
+Start Consumer:
+----------------------------------
+bin/kafka-console-consumer.sh --topic mytopic1 --from-beginning --bootstrap-server localhost:9092
+
+Reading message from specific partition:
+---------------------------------------------------------------------
+bin/kafka-console-consumer.sh --topic mytopic1 --from-beginning --bootstrap-server localhost:9092 --partition 2
+
+Reading message from specific offset inside a specific partition:
+---------------------------------------------------------------------------------------------------------------
+bin/kafka-console-consumer.sh --topic mytopic1  --bootstrap-server localhost:9092 --partition 2 --offset 1
+
+Reading message from specific offset (Will Give ERROR):
+-------------------------------------------------------------------------
+bin/kafka-console-consumer.sh --topic mytopic1  --bootstrap-server localhost:9092  --offset 0

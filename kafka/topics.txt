@@ -10,3 +10,9 @@ bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 # Describe a topic 
 bin/kafka-topics.sh --describe --topic mytopic1 --bootstrap-server localhost:9092
 
+# Partion in a topic
+bin/kafka-topics.sh --create --topic mytopic1 --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+
+NOTE: Starting with kafka 2.4, the default partitioner was changed from round-robin to sticky, 
+https://stackoverflow.com/questions/74900130/kafka-is-not-sending-messages-to-other-partitions
+https://www.confluent.io/blog/apache-kafka-producer-improvements-sticky-partitioner/
