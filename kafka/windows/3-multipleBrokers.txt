@@ -1,0 +1,39 @@
+Start Zookeeper:
+------------------
+F:/kafka_2.12-3.2.0/bin/windows/zookeeper-server-start.bat F:/kafka_2.12-3.2.0/config/zookeeper.properties
+
+Start Kafka-server:
+--------------------
+F:/kafka_2.12-3.2.0/bin/windows/kafka-server-start.bat F:/kafka_2.12-3.2.0/config/server.properties
+
+F:/kafka_2.12-3.2.0/bin/windows/zookeeper-shell.bat localhost:2181 ls /brokers/ids
+
+F:/kafka_2.12-3.2.0/bin/windows/kafka-server-start.bat F:/kafka_2.12-3.2.0/config/server1.properties
+
+F:/kafka_2.12-3.2.0/bin/windows/kafka-server-start.bat F:/kafka_2.12-3.2.0/config/server2.properties
+
+F:/kafka_2.12-3.2.0/bin/windows/kafka-server-start.bat F:/kafka_2.12-3.2.0/config/server3.properties
+
+Create a topic:
+----------------
+F:/kafka_2.12-3.2.0/bin/windows/kafka-topics.bat --create --topic demo_testing2 --bootstrap-server localhost:9092,localhost:9093,localhost:9094 --replication-factor 1 --partitions 5
+
+
+Start Producer:
+-----------------
+F:/kafka_2.12-3.2.0/bin/windows/kafka-console-producer.bat --topic demo_testing2 --bootstrap-server localhost:9092,localhost:9093,localhost:9094
+
+Start Consumer:
+----------------
+F:/kafka_2.12-3.2.0/bin/windows/kafka-console-consumer.bat --topic demo_testing2 --from-beginning --bootstrap-server localhost:9092,localhost:9093,localhost:9094
+
+
+Sample Messages used in the demo:
+------------------------------------------------------------------
+Hi , this is the first message--second server , partition 0
+Hello 2nd one--partition4 , first server
+Hi there third one--partition3 , second server
+4th message coming---partition 2, third server 
+5 th message testing--second server , partition 0
+test1223--partition1 , first server
+Welcome--partition4 , first server

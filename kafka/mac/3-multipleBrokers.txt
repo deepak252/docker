@@ -1,0 +1,46 @@
+Start Zookeeper:
+------------------
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Start Kafka-server:
+--------------------
+bin/kafka-server-start.sh config/server.properties
+
+# list the IDs of active Kafka brokers. 
+bin/zookeeper-shell.sh localhost:2181 ls /brokers/ids
+
+Create File: server1.properties and overwrite these -
+broker.id=0
+listeners=PLAINTEXT://:9092
+log.dirs=/Users/deepak/Documents/kafka_logs/server_logs1
+
+Create File: server2.properties and overwrite these -
+broker.id=1
+listeners=PLAINTEXT://:9093
+log.dirs=/Users/deepak/Documents/kafka_logs/server_logs2
+
+Create File: server3.properties and overwrite these -
+broker.id=2
+listeners=PLAINTEXT://:9094
+log.dirs=/Users/deepak/Documents/kafka_logs/server_logs3
+
+
+bin/kafka-server-start.sh config/server1.properties
+bin/kafka-server-start.sh config/server2.properties
+bin/kafka-server-start.sh config/server3.properties
+
+
+Create a topic:
+----------------
+bin/kafka-topics.sh --create --topic mytopic1 --bootstrap-server localhost:9092,localhost:9093,localhost:9094 --replication-factor 1 --partitions 5
+
+
+Start Producer:
+-----------------
+bin/kafka-console-producer.sh --topic mytopic1 --bootstrap-server localhost:9092,localhost:9093,localhost:9094
+
+Start Consumer:
+----------------
+bin/kafka-console-consumer.sh --topic mytopic1 --from-beginning --bootstrap-server localhost:9092,localhost:9093,localhost:9094 --from-beginning
+
+NOTE: BEHAVIOUR CHANGE ON LATEST VERSION
