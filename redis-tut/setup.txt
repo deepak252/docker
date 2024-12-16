@@ -1,0 +1,6 @@
+> docker pull redis/redis-stack:6.2.6-v17
+> docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:6.2.6-v17
+
+> docker exec -it <CONTAINER ID> bash
+    > redis-cli
+    

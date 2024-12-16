@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "ioredis": "^5.4.1"
+  },
+  "name": "nodejs-redis",
+  "version": "1.0.0",
+  "main": "client.js",
+  "devDependencies": {},
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

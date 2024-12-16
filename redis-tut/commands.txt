@@ -1,0 +1,2 @@
+> set user:1 deepak  // set <ENTITY>:<ID> value
+> get user:1
