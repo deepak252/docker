@@ -1,18 +1,8 @@
 services:
-  postgres:
-    image: postgres:16.4
+  app:
+    build: .
     ports:
-      - '5432:5432'
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_DB: ecommerce
-      POSTGRES_PASSWORD: password
-
-  redis:
-    image: redis:7.4.0
-    ports:
-      - '6379:6379'
-
-
-# --> docker compose up
-# --> docker compose down
+      - 3000:3000
+    volumes:
+      - .:/app # Changes in the host directory immediately visible inside the container.
+      - /app/node_modules # Avoid overriding node_modules
