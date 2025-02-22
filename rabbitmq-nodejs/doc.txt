@@ -1,0 +1,1 @@
+Exchange binds with the queue using routing key
