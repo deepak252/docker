@@ -1,0 +1,21 @@
+- Suppose you have an application that needs to read messages from a kafka topic, run some validations against them and write the results to another data store (eg. database).
+- In this case your application will create a consumer object, subscribe to the appropriate topic and start receiving messages, validating them and writing the results.
+i.e. Case: MULTIPLE PRODUCERS (AS WELL AS MULTIPLE TOPIC PARTITIONS) AND SINGLE CONSUMER.
+If you are limited to a single consumer reading and processing the data, your application may fall farther behind and unable to keep up with the rate of incoming messages.
+i.e. There is need to SCALE CONSUMPTIONS FROM TOPIC
+Just like multiple producers can write to the same topic, we need to allow multiple consumers to read from the same topic, splitting the data bw them.
+
+
+Kafka consumers are part of a consumer group. When Multiple consumers are subscribed to a topic and belonging to the same consumer group, each consumer in the group will receive messages from a different subset of the partitions in a topic.
+
+NOTE: 
+1. Total no. of consumers with in the consumer group should not exceed total no. of partitions with in the topic.
+2. It is acceptable to have MULTIPLE CONSUMER GROUPS (group1, group2, ...) on the same topic
+
+
+
+
+Start Multiple Consumers with Consumer Group:
+--------------------------------
+bin/kafka-console-consumer.sh --topic mytopic1 --from-beginning --bootstrap-server localhost:9092 --group mygroup1
+
