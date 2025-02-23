@@ -1,0 +1,9 @@
+
+>   const q = await channel.assertQueue("", { exclusive: true });
+    "" -> Lets RabbitMQ automatically assign a random queue name.
+    { exclusive: true } -> The queue is deleted when the connection closes, and only this consumer can access it.
+                            When the consumer disconnects, RabbitMQ automatically deletes the queue.
+
+>   await channel.bindQueue(q.queue, exchange, "");
+    This binds the temporary queue to an exchange.
+    "" (empty routing key)	-> All messages from the exchange go to this queue (used in fanout exchanges).
