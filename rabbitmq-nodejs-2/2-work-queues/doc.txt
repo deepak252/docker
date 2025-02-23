@@ -1,5 +1,3 @@
-// Ref: Web Dev Journey
-
 > await channel.assertQueue(queue, { durable: true });
     durable: true (Queue Persistance)→ if RabbitMQ restarts, this queue will not be lost.
 
