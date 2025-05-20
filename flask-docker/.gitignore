@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+.env
+
+# Editor settings
+.vscode/
+.idea/
+
+# Logs and caches
+*.log
+logs/
+.pytest_cache/
+.mypy_cache/
+
+# Dependency files
+poetry.lock
+pip-wheel-metadata/
