@@ -1,0 +1,11 @@
+Celery is a task queue or job queue. It lets you run tasks in the background (asynchronously) instead of blocking your main application.
+- scalable and distributed
+
+Celery uses three key components:
+    Producer (your app) → Sends task to be done.
+    Broker (e.g., RabbitMQ or Redis) → Holds the task temporarily.
+    Worker → Runs the task in the background.
+
+1.  docker compose up
+2.  celery -A tasks worker --loglevel=info
+3.  python3 run_task.py
