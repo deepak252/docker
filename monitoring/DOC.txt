@@ -1,0 +1,8 @@
+The node_exporter is designed to monitor the host system. Deploying in containers requires extra care in order to avoid monitoring the container itself.
+
+https://github.com/prometheus/node_exporter
+https://prometheus.io/docs/guides/node-exporter/
+
+Grafana Dasboards:
+    Node Exporter - Node Exporter Full (1860)
+    Cadvisor - Cadvisor exporter (14282)
