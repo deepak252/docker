@@ -45,6 +45,13 @@ services:
     privileged: true
     ports:
       - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
     # volumes:
     #   - /:/rootfs:ro
     #   - /run:/run:ro
@@ -54,20 +61,7 @@ services:
     # devices:
     #   - /dev/kmsg
     # restart: unless-stopped
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    depends_on:
-      - redis
-  
-  redis:
-    image: redis:7.4.0
-    container_name: redis
-    ports:
-      - 6379:6379
-
+    
 volumes:
   prometheus-data:
     driver: local
