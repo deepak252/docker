@@ -1,0 +1,36 @@
+services:
+  go-api:
+    build: ./go-api
+    ports:
+      - "8081:8080"
+    networks:
+      - monitoring
+  
+  node-api:
+    build: ./node-api
+    ports:
+      - "8082:8080"
+    networks:
+      - monitoring
+      
+  fastapi-api:
+    build: ./fastapi-api
+    ports:
+      - "8083:8080"
+    networks:
+      - monitoring
+
+
+networks:
+  monitoring:
+    external: true
+
+## Create an external network
+# docker network create monitoring
+
+## Show container stats
+# docker stats 0a7d33a684c2 6cfbc0b43488 d82902d1b6d6
+
+# wrk -t4 -c100 -d300s http://localhost:8081
+# wrk -t4 -c100 -d300s http://localhost:8082
+# wrk -t4 -c100 -d300s http://localhost:8083

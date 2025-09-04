@@ -13,6 +13,8 @@ services:
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus-data:/prometheus
     restart: unless-stopped
+    networks:
+      - monitoring
   
   grafana:
     image: grafana/grafana:latest
@@ -22,6 +24,8 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
     restart: unless-stopped
+    networks:
+      - monitoring
     # environment:
     #   - GF_SECURITY_ADMIN_USER=admin
     #   - GF_SECURITY_ADMIN_PASSWORD=admin123
@@ -38,6 +42,8 @@ services:
       - '/:/host:ro'
     ports:
       - "9100:9100"
+    networks:
+      - monitoring
   
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
@@ -52,6 +58,8 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
       - /dev/disk/:/dev/disk:ro
+    networks:
+      - monitoring
     # volumes:
     #   - /:/rootfs:ro
     #   - /run:/run:ro
@@ -67,3 +75,7 @@ volumes:
     driver: local
   grafana-data:
     driver: local
+
+networks:
+  monitoring:
+    external: true
