@@ -8,6 +8,14 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Nodejs Server" });
 });
 
+app.get("/heavy", (req, res) => {
+  let total = 0;
+  for (let i = 0; i < 1e5; i++) {
+    total += i;
+  }
+  res.json({ total });
+});
+
 app.get("/heavy-task", async (req, res) => {
   try {
     const timeTaken = await doHeavyTask();

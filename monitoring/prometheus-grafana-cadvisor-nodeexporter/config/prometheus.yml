@@ -28,9 +28,10 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
 
-  - job_name: "nodejs_services"
+  - job_name: "backend_services"
     static_configs:
       - targets:
           - "go-api:8080"
           - "node-api:8080"
           - "fastapi-api:8080"
+          - "java-api:8080"
