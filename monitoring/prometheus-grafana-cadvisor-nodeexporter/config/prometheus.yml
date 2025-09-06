@@ -35,3 +35,4 @@ scrape_configs:
           - "node-api:8080"
           - "fastapi-api:8080"
           - "java-api:8080"
+          - "go-api-v2:8080"
