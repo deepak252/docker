@@ -1,0 +1,9 @@
+Run without docker:
+    1. docker compose up.  (only rabbitmq)
+    2. cd app
+    3. celery -A tasks.celery worker --loglevel=info
+    4. uvicorn main:app --port 8080 --reload
+
+Run with docker:
+    1. docker compose up
+    
