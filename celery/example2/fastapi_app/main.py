@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from celery import Celery
 
-celery = Celery("tasks", broker="amqp://guest:guest@rabbitmq:5672//")
+celery = Celery(
+    "tasks", 
+    broker="amqp://guest:guest@rabbitmq:5672//",
+    backend="db+postgresql://root:root@db/test_db",
+)
 
 app = FastAPI()
 

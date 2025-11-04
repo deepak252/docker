@@ -44,3 +44,20 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
+
+  # PostgreSQL as a Celery result backend
+  db:
+    container_name: postgres
+    image: postgres:16.4
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test_db
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:

@@ -1,7 +1,11 @@
 from celery import Celery
 import time
 
-celery = Celery("tasks", broker="amqp://guest:guest@rabbitmq:5672//")
+celery = Celery(
+    "tasks", 
+    broker="amqp://guest:guest@rabbitmq:5672//",
+    backend="db+postgresql://root:root@db/test_db"
+)
 
 # Declares this function as a Celery task.
 # Celery registers this function so it can be called asynchronously by workers.

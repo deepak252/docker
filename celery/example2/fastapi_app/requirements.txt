@@ -1,3 +1,5 @@
 fastapi
 uvicorn
 celery
+sqlalchemy
+psycopg2-binary

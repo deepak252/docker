@@ -5,3 +5,10 @@ Run with docker:
 FastAPI     | http://localhost:8000     | API to trigger tasks      |
 RabbitMQ UI | http://localhost:15672    | Broker visualization      |
 Flower UI   | http://localhost:5555     | Task monitoring dashboard |
+
+Verify Postgresql
+    1. docker exec -it postgres  sh
+    2. psql -U root -d test_db
+    3. \dt      // Celery-created tables:
+        eg. public.celery_taskmeta,  public.celery_tasksetmeta
+    4. SELECT * FROM celery_taskmeta;
