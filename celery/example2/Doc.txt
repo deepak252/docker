@@ -1,0 +1,7 @@
+Run with docker:
+    1. docker compose up
+
+
+FastAPI     | http://localhost:8000     | API to trigger tasks      |
+RabbitMQ UI | http://localhost:15672    | Broker visualization      |
+Flower UI   | http://localhost:5555     | Task monitoring dashboard |
