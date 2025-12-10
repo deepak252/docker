@@ -1,0 +1,172 @@
+# ✅ **1. Basic Topic Commands**
+
+### **🔹 List all topics**
+
+```bash
+kafka-topics.sh --list --bootstrap-server localhost:9092
+```
+
+Shows all existing topics in the cluster.
+
+---
+
+### **🔹 Describe a topic (important!)**
+
+```bash
+kafka-topics.sh --describe --topic my-topic --bootstrap-server localhost:9092
+```
+
+Shows partitions, replication factor, ISR, configs, etc.
+
+---
+
+# ✅ **2. Create a Topic**
+
+### **🔹 Create topic with default configs**
+
+```bash
+kafka-topics.sh --create \
+  --topic my-topic \
+  --partitions 3 \
+  --replication-factor 1 \
+  --bootstrap-server localhost:9092
+```
+
+---
+
+### **🔹 Create topic with custom configs**
+
+```bash
+kafka-topics.sh --create \
+  --topic my-topic \
+  --partitions 3 \
+  --replication-factor 2 \
+  --config retention.ms=86400000 \
+  --config cleanup.policy=delete \
+  --bootstrap-server localhost:9092
+```
+
+---
+
+# ✅ **3. Delete a Topic**
+
+```bash
+kafka-topics.sh --delete \
+  --topic my-topic \
+  --bootstrap-server localhost:9092
+```
+
+---
+
+# ✅ **4. Add / Increase Partitions (Incremental)**
+
+### **🔹 Add more partitions**
+
+```bash
+kafka-topics.sh --alter \
+  --topic my-topic \
+  --partitions 6 \
+  --bootstrap-server localhost:9092
+```
+
+⚠️ **Partitions can only be increased, never decreased.**
+
+---
+
+# ✅ **5. Update Topic Configuration (Incremental Alter Configs)**
+
+Kafka supports 2 styles:
+
+* **Non-incremental (old style) – overrides full config**
+* **Incremental (new modern way)**
+
+---
+
+## **A. Incremental Alter Topic Config (Recommended)**
+
+### **🔹 Add/update config**
+
+```bash
+kafka-topics.sh --alter \
+  --topic my-topic \
+  --bootstrap-server localhost:9092 \
+  --alter-config retention.ms=604800000
+```
+
+### **🔹 Delete a config**
+
+```bash
+kafka-topics.sh --alter \
+  --topic my-topic \
+  --bootstrap-server localhost:9092 \
+  --delete-config retention.ms
+```
+
+---
+
+## **B. Legacy Non-incremental configs**
+
+(You rarely use this now but good to know)
+
+```bash
+kafka-topics.sh --alter \
+  --topic my-topic \
+  --config retention.ms=3600000 \
+  --bootstrap-server localhost:9092
+```
+
+---
+
+# ✅ **6. Move Partition Leadership (Advanced)**
+
+(Not commonly needed – used during cluster maintenance)
+
+```bash
+kafka-topics.sh --alter \
+  --topic my-topic \
+  --bootstrap-server localhost:9092 \
+  --replica-assignment 0:1,1:2,2:0
+```
+
+---
+
+# ✅ **7. View Under-Replicated Topics**
+
+```bash
+kafka-topics.sh --bootstrap-server localhost:9092 --describe | grep UnderReplicated
+```
+
+---
+
+# ✅ **8. View Internal Topics**
+
+```bash
+kafka-topics.sh --list --bootstrap-server localhost:9092 | grep "__"
+```
+
+---
+
+# ✅ **9. List Partitions of a Topic**
+
+```bash
+kafka-topics.sh --describe --topic my-topic --bootstrap-server localhost:9092 | grep "Partition"
+```
+
+---
+
+# 🧩 FULL SUMMARY (Incremental Cheat Sheet)
+
+| Level        | Command                   | Purpose                      |
+| ------------ | ------------------------- | ---------------------------- |
+| Beginner     | `--list`                  | List topics                  |
+| Beginner     | `--describe`              | Show topic details           |
+| Beginner     | `--create`                | Create topic                 |
+| Intermediate | `--delete`                | Delete topic                 |
+| Intermediate | `--alter --partitions`    | Increase partitions          |
+| Intermediate | `--alter --config`        | Modify configs (old way)     |
+| Advanced     | `--alter --alter-config`  | Incrementally modify configs |
+| Advanced     | `--alter --delete-config` | Remove a config              |
+| Advanced     | `--replica-assignment`    | Manually assign replicas     |
+| Advanced     | grep + describe           | debug ISR, URP               |
+
+---

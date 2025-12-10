@@ -1,6 +1,11 @@
 Celery is a task queue or job queue. It lets you run tasks in the background (asynchronously) instead of blocking your main application.
 - scalable and distributed
 
+Idea:
+    Our python app will send the message to the task queue
+    Celery will be listening to the task queue
+    
+
 Celery uses three key components:
     Producer (your app) → Sends task to be done.
     Broker (e.g., RabbitMQ or Redis) → Holds the task temporarily.
