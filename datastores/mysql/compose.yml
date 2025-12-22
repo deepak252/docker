@@ -1,0 +1,36 @@
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    restart: unless-stopped
+
+    ports:
+      - "3306:3306"
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cscan
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+
+    command:
+      [
+        "--default-authentication-plugin=mysql_native_password",
+        "--innodb-buffer-pool-size=1G",
+        "--innodb-log-file-size=256M",
+        "--max-connections=500",
+        "--slow-query-log=1",
+        "--long-query-time=1"
+      ]
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
+      # - ./mysql/conf:/etc/mysql/conf.d
+
+volumes:
+  mysql_data:
+
+# docker exec -it <containerid> bash
+# mysql -u admin -p cscan
