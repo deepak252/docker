@@ -1,0 +1,6 @@
+Reset table, eg.:
+    > delete from panelists;
+    > alter table panelists auto_increment = 1;
+
+DB Disk Usage:
+    > sudo du -sh /var/lib/docker/volumes/mysql_mysql_data/_data

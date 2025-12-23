@@ -102,6 +102,7 @@ CREATE TABLE campaigns (
 -- =========================
 CREATE TABLE users (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
   role ENUM('ADMIN','ANALYST') NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -112,8 +113,10 @@ CREATE TABLE users (
 -- =========================
 CREATE TABLE panelists (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
   age INT,
-  gender VARCHAR(20),
+  gender CHAR(1),
   country_id BIGINT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
