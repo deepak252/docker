@@ -38,6 +38,11 @@ def random_industry():
 def random_country_id(max_id=5):
     return random.randint(1, max_id)
 
+def random_mchannel_id(max_id=5):
+    return random.randint(1, max_id)
+
+def random_category():
+    return random.choice(INDUSTRIES)
 
 def random_media_type():
     return random.choice(["IMAGE", "VIDEO", "PDF"])
@@ -67,10 +72,21 @@ def random_email(domains = DOMAINS):
 def random_sentence(max_words=10):
     return fake.sentence(nb_words=max_words)
 
-
 def random_date_recent(days=90):
     return fake.date_between(start_date=f"-{days}d", end_date="today")
 
+
+def random_date(start_date):
+    return fake.date_between(start_date=start_date, end_date="+90d")
+
+def random_media_url(media_type):
+    base = "https://cdn.cscan.com"
+
+    if media_type == "IMAGE":
+        return f"{base}/images/{fake.uuid4()}.jpg"
+    if media_type == "VIDEO":
+        return f"{base}/videos/{fake.uuid4()}.mp4"
+    return f"{base}/docs/{fake.uuid4()}.pdf"
 
 # def execute(callback, label = ""):
 #     start = time.time()
