@@ -2,4 +2,6 @@ fastapi                # The main framework used to build high-performance APIs
 uvicorn                # ASGI server to run FastAPI in production (supports async & hot reload)
 pydantic               # Data validation & serialization (FastAPI request/response models)
 pydantic-settings      # Manages environment variables and configuration using Pydantic Settings
-faker 
+confluent-kafka
+sqlalchemy
+pymysql

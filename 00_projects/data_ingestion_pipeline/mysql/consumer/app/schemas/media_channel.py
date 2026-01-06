@@ -1,14 +1,14 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-class UserBase(BaseModel):
+class MediaChannelBase(BaseModel):
     name: str
-    email: str
+    type: str
 
-class UserCreate(UserBase):
+class MediaChannelCreate(MediaChannelBase):
     pass
 
-class UserResponse(UserBase):
+class MediaChannelResponse(MediaChannelBase):
     id: int
     created_at: datetime
 

@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from app.schemas.country import CountryListPayload
+from app.schemas.media_channel import MediaChannelListPayload
 from app.core.response import ApiResponse
 from app.core.dependencies import get_producer_service
 from app.services.producer_service import ProducerService
@@ -11,6 +12,20 @@ def produce_countries(payload: CountryListPayload, service: ProducerService = De
     countries = service.produce_countries(payload.countries)
     return ApiResponse(message="Countries published", data={
         "count": len(countries)
+    })
+
+@router.post("/media-channels", response_model=ApiResponse)
+def produce_media_channels(payload: MediaChannelListPayload, service: ProducerService = Depends(get_producer_service)):
+    media_channels = service.produce_media_channels(payload.media_channels)
+    return ApiResponse(message="Media Channels published", data={
+        "count": len(media_channels)
+    })
+
+@router.post("/companies", response_model=ApiResponse)
+def produce_companies(count: int = Query(10, ge=1, le=1000) , service: ProducerService = Depends(get_producer_service)):
+    service.produce_companies(count)
+    return ApiResponse(message="Companies added to queue", data={
+        "count": count
     })
 
 # def create_user(payload: UserCreate, service: UserService = Depends(get_user_service)):

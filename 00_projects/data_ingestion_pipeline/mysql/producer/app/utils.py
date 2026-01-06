@@ -22,6 +22,7 @@ COMPANY_SUFFIXES = suffixes = [
     "Group", "Industries", "Holdings", "Corp", "Ltd"
 ]
 COUNTRIES = [("India","IN"), ("USA","US"), ("UK","GB"), ("Germany","DE"), ("Canada","CA")]
+MEDIA_CHANNELS = [ ("Direct Mail",None),  ("Email",None), ("Online Display",None), ("UX Media",None), ("SEM",None) ]
 
 def random_company_name():
     company_name = fake.company()
@@ -87,3 +88,10 @@ def random_media_url(media_type):
     if media_type == "VIDEO":
         return f"{base}/videos/{fake.uuid4()}.mp4"
     return f"{base}/docs/{fake.uuid4()}.pdf"
+
+def generate_company():
+    return (
+        random_company_name(),    # name
+        random_industry(),        # industry
+        random_country_id(),      # country_id
+    )

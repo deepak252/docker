@@ -1,8 +1,7 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    # DATABASE_URL:str = "postgresql://root:root@localhost:5432/testdb"
-    DATABASE_URL:str = "postgresql://root:root@localhost:5432/testdb"
+    DATABASE_URL:str = "mysql+pymysql://admin:admin@localhost:3306/productsdb"
     # Pydantic configuration class (nested class)
     class Config: 
         env_file = ".env"
