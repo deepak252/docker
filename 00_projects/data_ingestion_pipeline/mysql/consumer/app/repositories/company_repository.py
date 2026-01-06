@@ -1,3 +1,20 @@
+from sqlalchemy.orm import Session
+from app.models.company import Company
+
+class CompanyRepository:
+    db: Session
+    def __init__(self, db: Session):
+        self.db = db
+    
+    def create(self, company: Company):
+        self.db.add(company)
+        self.db.commit()
+        self.db.refresh(company)
+        return company
+    
+    def get_all(self):
+        return self.db.query(Company).all()
+    
 # from sqlalchemy.orm import Session
 # from app.models.user import User
 

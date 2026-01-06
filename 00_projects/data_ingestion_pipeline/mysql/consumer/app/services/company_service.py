@@ -1,3 +1,26 @@
+from app.repositories.company_repository import CompanyRepository
+from app.schemas.company import CompanyCreate
+from app.models.company import Company
+
+class CompanyService:
+    repo: CompanyRepository
+
+    def __init__(self, repo: CompanyRepository):
+        self.repo = repo
+
+    def create_company(self, payload: CompanyCreate):
+        company = Company(
+            name=payload.name,
+            industry=payload.industry,
+            country_id=payload.country_id
+        )
+        return self.repo.create(company)
+    
+    def get_all_countries(self):
+        return self.repo.get_all()
+    
+        
+    
 # from app.repositories.company_repository import CompanyRepository
 # from app.schemas.user import UserCreate
 # from app.models.user import User

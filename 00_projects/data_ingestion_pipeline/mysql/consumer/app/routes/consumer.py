@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends
 from app.schemas.country import CountryCreate, CountryResponse
 from app.schemas.media_channel import MediaChannelCreate, MediaChannelResponse
+from app.schemas.company import CompanyCreate, CompanyResponse
 from app.core.response import ApiResponse
-from app.core.dependencies import get_country_service, get_media_channel_service
+from app.core.dependencies import get_country_service, get_media_channel_service, get_company_service
 from app.services.country_service import CountryService
 from app.services.media_channel_service import MediaChannelService
+from app.services.company_service import CompanyService
 
 router = APIRouter(prefix="/api/v1/consumer", tags=["Consumer"])
 
@@ -21,6 +23,12 @@ def produce_countries(payload: CountryCreate, service: CountryService = Depends(
 def produce_countries(payload: MediaChannelCreate, service: MediaChannelService = Depends(get_media_channel_service)):
     m_channel = service.create_media_channel(payload)
     return ApiResponse(message="Media Channel published", data=MediaChannelResponse.model_validate(m_channel))
+
+@router.post("/companies", response_model=ApiResponse)
+def produce_companies(payload: CompanyCreate, service: CompanyService = Depends(get_company_service)):
+    company = service.create_company(payload)
+    return ApiResponse(message="Company published", data=CompanyResponse.model_validate(company))
+
 # @router.post("/media-channels", response_model=ApiResponse)
 # def produce_media_channels(payload: MediaChannelListPayload, service: ProducerService = Depends(get_producer_service)):
 #     media_channels = service.produce_media_channels(payload.media_channels)
