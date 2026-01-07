@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import producer
+from app.routes import country
 from app.core.exceptions import (
     AppException, 
     app_exception_handler, 
@@ -15,8 +15,7 @@ def home():
         "message": "producer is up"
     }
 
-# app.include_router(users.router, prefix="/api")
-app.include_router(producer.router, prefix="")
+app.include_router(country.router, prefix="/api/v1")
 
 # Custom business error handler
 app.add_exception_handler(AppException, app_exception_handler)

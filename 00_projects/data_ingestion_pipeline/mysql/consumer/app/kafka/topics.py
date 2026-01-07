@@ -1,0 +1,1 @@
+COUNTRIES_CREATED = "cscan.countries.created.v1"

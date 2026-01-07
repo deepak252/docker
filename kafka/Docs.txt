@@ -1,0 +1,8 @@
+Topics Naming Convention:
+General Structure: <domain>.<entity>.<event-type>.<version>
+    eg. payments.orders.created.v1
+        auth.users.signup.v1
+
+    OR: <env>.<domain>.<entity>.<event>.v1
+    eg. prod.auth.users.created.v1
+        dev.game.players.scored.v1

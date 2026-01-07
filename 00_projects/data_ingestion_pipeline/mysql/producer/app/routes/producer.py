@@ -1,18 +1,31 @@
 from fastapi import APIRouter, Depends, Query
-from app.schemas.country import CountryListPayload
+from app.schemas.country import Country
 from app.schemas.media_channel import MediaChannelListPayload
 from app.core.response import ApiResponse
-from app.core.dependencies import get_producer_service
+from app.core.dependencies import get_producer_service, get_country_service
 from app.services.producer_service import ProducerService
-
+from app.services.country_service import CountryService
+from typing import Optional
 router = APIRouter(prefix="/api/v1/producer", tags=["Producer"])
 
 @router.post("/countries", response_model=ApiResponse)
-def produce_countries(payload: CountryListPayload, service: ProducerService = Depends(get_producer_service)):
-    countries = service.produce_countries(payload.countries)
+def publish_country(payload: Optional[Country], service: CountryService = Depends(get_country_service)):
+    service.publish_country(payload)
+    return ApiResponse(message="Country published", data=payload)
+
+@router.post("/countries/generate", response_model=ApiResponse)
+def generate_countries(service: CountryService = Depends(get_country_service)):
+    cnt = service.generate_countries()
     return ApiResponse(message="Countries published", data={
-        "count": len(countries)
+        "count": cnt
     })
+
+# @router.post("/countries", response_model=ApiResponse)
+# def produce_countries(payload: CountryListPayload, service: ProducerService = Depends(get_producer_service)):
+#     countries = service.produce_countries(payload.countries)
+#     return ApiResponse(message="Countries published", data={
+#         "count": len(countries)
+#     })
 
 @router.post("/media-channels", response_model=ApiResponse)
 def produce_media_channels(payload: MediaChannelListPayload, service: ProducerService = Depends(get_producer_service)):
