@@ -1,17 +1,28 @@
-from app.kafka.client import KafkaClient, delivery_report
+# from app.kafka.client import Retr
+from confluent_kafka import Consumer
 import json
 
-# class KafkaConsumer:
+class KafkaConsumer:
+    def __init__(self, consumer: Consumer, dispatcher):
+        self.consumer = consumer
+        self.dispatcher = dispatcher
+        # self.retry = RetryPublisher()
 
-#     def publish(self, topic: str, key: str, payload: dict):
+    def start(self, topics: list[str]):
+        self.consumer.subscribe(topics)
 
-#         producer = KafkaClient.get_producer()
+        while True:
+            msg = self.consumer.poll(1.0)
 
-#         producer.produce(
-#             topic=topic,
-#             key=key, # The key decides to which partition the message goes, and ensures ordering per key
-#             value=json.dumps(payload),
-#             callback=delivery_report,
-#         )
+            if not msg or msg.error():
+                continue
 
-#         producer.flush()
+            payload = json.loads(msg.value())
+
+            try:
+                self.dispatcher.dispatch(msg.topic(), payload)
+                self.consumer.commit(msg)
+
+            except Exception as e:
+                print(e)
+                # self.retry.handle(msg, payload, e)

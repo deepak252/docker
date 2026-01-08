@@ -1,4 +1,4 @@
-from confluent_kafka import Producer
+from confluent_kafka import Producer, Consumer
 from app.core.config import settings
 
 class KafkaClient:
@@ -15,6 +15,14 @@ class KafkaClient:
                 "linger.ms": 20,
             })
         return cls._producer
+    
+    @classmethod
+    def get_consumer(cls, group_id: str):
+        return Consumer({
+            "bootstrap.servers": settings.KAFKA_BOOTSTRAP,
+            "group.id": group_id,
+            "auto.offset.reset": "earliest",
+        })
 
 def delivery_report(err, msg):
     if err:
