@@ -1,5 +1,5 @@
 from app.kafka.producer import KafkaProducer
-from app.kafka.topics import COUNTRIES_CREATED
+from app.kafka.topics import COUNTRY_CREATED
 from app.utils import COUNTRIES
 from app.schemas.country import Country
 
@@ -7,12 +7,12 @@ class CountryService:
     kafka: KafkaProducer
 
     def __init__(self):
-        self.kafka = KafkaProducer()
+        self.kafka = KafkaProducer()        
 
     def publish_country(self, country: Country):
         self.kafka.publish(
-            topic = COUNTRIES_CREATED,
-            key = "countries",
+            topic = COUNTRY_CREATED,
+            key = "country",
             payload=country.model_dump()
         )
 
@@ -23,8 +23,8 @@ class CountryService:
                 iso_code = country[1]
             )
             self.kafka.publish(
-                topic = COUNTRIES_CREATED,
-                key = "countries",
+                topic = COUNTRY_CREATED,
+                key = "country",
                 payload=country.model_dump()
             )
         return len(COUNTRIES)

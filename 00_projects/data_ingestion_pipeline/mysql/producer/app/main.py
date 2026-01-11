@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import country
+from app.routes import country, media_channel, company, product, product_media
 from app.core.exceptions import (
     AppException, 
     app_exception_handler, 
@@ -16,6 +16,10 @@ def home():
     }
 
 app.include_router(country.router, prefix="/api/v1")
+app.include_router(media_channel.router, prefix="/api/v1")
+app.include_router(company.router, prefix="/api/v1")
+app.include_router(product.router, prefix="/api/v1")
+app.include_router(product_media.router, prefix="/api/v1")
 
 # Custom business error handler
 app.add_exception_handler(AppException, app_exception_handler)

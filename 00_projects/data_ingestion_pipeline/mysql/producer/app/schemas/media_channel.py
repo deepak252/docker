@@ -1,9 +1,5 @@
-from pydantic import BaseModel, Field
-from typing import List
+from pydantic import BaseModel
 
 class MediaChannel(BaseModel):
     name: str
     type: str
-
-class MediaChannelListPayload(BaseModel):
-    media_channels: List[MediaChannel]
