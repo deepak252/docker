@@ -1,49 +1,34 @@
-from app.kafka.client import KafkaClient
-from app.kafka.consumer import KafkaConsumer
-from app.kafka.dispatcher import Dispatcher
-from app.kafka.topics import COUNTRIES_CREATED
+from app.core.config import settings
+from app.core.kafka import KafkaClient
+from app.consumer.kafka_consumer import KafkaConsumer
+from app.dispatcher.dispatcher import Dispatcher
+from app.sinks.runner import SinkRunner
+from app.core.topics import COUNTRIES_CREATED
+from app.utils.logger import setup_logging, get_logger
+
+logger = get_logger(__name__)
 
 def main():
-    consumer = KafkaClient.get_consumer("countries.ingestion.v1")
-    dispatcher = Dispatcher()
+    setup_logging()
+    logger.info("🚀 Starting Kafka ingestion service")
+    consumer = KafkaClient.get_consumer(
+        group_id=settings.KAFKA_CONSUMER_GROUP
+    )
 
-    KafkaConsumer(consumer, dispatcher).start([
-        COUNTRIES_CREATED,
-    ])
+    dispatcher = Dispatcher()
+    sink_runner = SinkRunner()
+
+    kafka_consumer = KafkaConsumer(
+        consumer=consumer,
+        dispatcher=dispatcher,
+        sink_runner=sink_runner
+    )
+
+    kafka_consumer.start(
+        topics=[
+            COUNTRIES_CREATED,
+        ]
+    )
 
 if __name__ == "__main__":
     main()
-
-
-# from fastapi import FastAPI
-# from app.core.database import Base, engine
-# from app.routes import consumer
-# from app.core.exceptions import (
-#     AppException, 
-#     app_exception_handler, 
-#     sqlalchemy_exception_handler, 
-#     unhandled_exception_handler
-# )
-# from sqlalchemy.exc import SQLAlchemyError
-
-# # Create DB tables
-# Base.metadata.create_all(bind=engine)
-
-# app = FastAPI(title="consumer fastapi")
-
-# @app.get('/')
-# def home():
-#     return {
-#         "status": "ok",
-#         "message": "consumer is up"
-#     }
-
-# # app.include_router(users.router, prefix="/api")
-# app.include_router(consumer.router, prefix="")
-
-# # Custom business error handler
-# app.add_exception_handler(AppException, app_exception_handler)
-# # SQLAlchemy DB exceptions
-# app.add_exception_handler(SQLAlchemyError, sqlalchemy_exception_handler)
-# # Catch-all fallback for ANY other exception
-# app.add_exception_handler(Exception, unhandled_exception_handler)

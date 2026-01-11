@@ -1,6 +1,12 @@
 from confluent_kafka import Producer, Consumer
 from app.core.config import settings
 
+def delivery_report(err, msg):
+    if err:
+        print("delivery failed:", err)
+    else:
+        print(f"Delivered {msg.topic()} [{msg.partition()}] offset={msg.offset()}")
+        
 class KafkaClient:
     _producer: Producer | None = None
 
@@ -20,13 +26,7 @@ class KafkaClient:
     def get_consumer(cls, group_id: str):
         return Consumer({
             "bootstrap.servers": settings.KAFKA_BOOTSTRAP,
-            # "enable.auto.commit": False,
             "group.id": group_id,
             "auto.offset.reset": "earliest",
+            "enable.auto.commit": False
         })
-
-def delivery_report(err, msg):
-    if err:
-        print("delivery failed:", err)
-    else:
-        print(f"Delivered {msg.topic()} [{msg.partition()}] offset={msg.offset()}")
