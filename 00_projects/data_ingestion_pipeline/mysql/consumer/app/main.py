@@ -3,7 +3,7 @@ from app.core.kafka import KafkaClient
 from app.consumer.kafka_consumer import KafkaConsumer
 from app.dispatcher.dispatcher import Dispatcher
 from app.sinks.runner import SinkRunner
-from app.core.topics import COUNTRIES_CREATED
+from app.consumer.topics import COUNTRY_CREATED, MCHANNEL_CREATED, COMPANY_CREATED, PRODUCT_CREATED, PRODUCT_MEDIA_CREATED
 from app.utils.logger import setup_logging, get_logger
 
 logger = get_logger(__name__)
@@ -26,7 +26,11 @@ def main():
 
     kafka_consumer.start(
         topics=[
-            COUNTRIES_CREATED,
+            COUNTRY_CREATED,
+            MCHANNEL_CREATED, 
+            COMPANY_CREATED, 
+            PRODUCT_CREATED, 
+            PRODUCT_MEDIA_CREATED
         ]
     )
 

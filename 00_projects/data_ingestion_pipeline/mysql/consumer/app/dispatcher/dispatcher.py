@@ -1,5 +1,9 @@
-from app.consumer.topics import COUNTRIES_CREATED
+from app.consumer.topics import COUNTRY_CREATED, MCHANNEL_CREATED, COMPANY_CREATED, PRODUCT_CREATED, PRODUCT_MEDIA_CREATED
 from app.writers.country_writer import CountryWriter
+from app.writers.media_channel_writer import MediaChannelWriter
+from app.writers.company_writer import CompanyWriter
+from app.writers.product_writer import ProductWriter
+from app.writers.product_media_writer import ProductMediaWriter
 from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -8,7 +12,11 @@ logger = get_logger(__name__)
 class Dispatcher:
     def __init__(self):
         self.mapping = {
-            COUNTRIES_CREATED: CountryWriter(),
+            COUNTRY_CREATED: CountryWriter(),
+            MCHANNEL_CREATED: MediaChannelWriter(),
+            COMPANY_CREATED: CompanyWriter(),
+            PRODUCT_CREATED: ProductWriter(),
+            PRODUCT_MEDIA_CREATED: ProductMediaWriter(),
             # PRODUCTS: ProductHandler(),
         }
     def get_writer(self, topic: str):

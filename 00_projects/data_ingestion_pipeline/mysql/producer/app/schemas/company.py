@@ -5,5 +5,3 @@ class Company(BaseModel):
     name: str
     industry: Optional[str] = None
     country_id: Optional[int] = None
-
-

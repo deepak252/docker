@@ -1,1 +1,5 @@
-COUNTRIES_CREATED = "cscan.countries.created.v1"
+COUNTRY_CREATED = "cscan.country.created.v1"
+MCHANNEL_CREATED = "cscan.mchannel.created.v1"
+COMPANY_CREATED = "cscan.company.created.v1"
+PRODUCT_CREATED = "cscan.product.created.v1"
+PRODUCT_MEDIA_CREATED = "cscan.productmedia.created.v1"
