@@ -14,7 +14,7 @@ class ProductService:
         end_date = random_date(start_date)
         budget = random.randint(1000, 100000)
         return Product(
-            company_id=random.randint(1, 4500),
+            company_id=random.randint(1, 1000),
             media_channel_id=random_mchannel_id(),
             country_id=random_country_id(),
             title=random_sentence(3),    
