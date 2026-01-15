@@ -27,5 +27,5 @@ class KafkaClient:
 def delivery_report(err, msg):
     if err:
         print("delivery failed:", err)
-    else:
-        print(f"Delivered {msg.topic()} [{msg.partition()}] offset={msg.offset()}")
+    # else:
+    #     print(f"Delivered {msg.topic()} [{msg.partition()}] offset={msg.offset()}")

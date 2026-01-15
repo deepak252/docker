@@ -14,9 +14,9 @@ class ProductMediaService:
     def generate_product_media(self, product_id = random.randint(1, 4000)) -> ProductMedia:
         media_type = random_media_type()
         return ProductMedia(
-            product_id,  # product_id (FK-safe range)
-            media_type,
-            random_media_url(media_type)
+            product_id=product_id,  # product_id (FK-safe range)
+            media_type=media_type,
+            media_url=random_media_url(media_type)
         )
     
     def publish_product_media(self, media: ProductMedia):
