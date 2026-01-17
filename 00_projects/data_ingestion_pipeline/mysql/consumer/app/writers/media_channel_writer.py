@@ -8,6 +8,8 @@ class MediaChannelWriter(MySQLWritable):
                 text("""
                 INSERT INTO media_channels (name, type)
                 VALUES (:name, :type)
+                ON DUPLICATE KEY UPDATE
+                  type = VALUES(type)
                 """),
                 records
             )

@@ -1,0 +1,9 @@
+select count(*) from companies;
+select * from companies left join countries on companies.country_id = countries.id limit 10;
+
+
+select industry, count(*) as total from companies group by industry;
+select sum(count(*)) as total from companies group by industry;
+select sum(total) as cnt from (
+    select count(*) as total from companies group by industry
+) as t;

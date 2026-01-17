@@ -9,7 +9,7 @@ class KafkaProducer:
 
         producer.produce(
             topic=topic,
-            key=key, # The key decides to which partition the message goes, and ensures ordering per key
+            # key=key, # The key decides to which partition the message goes, and ensures ordering per key
             value=json.dumps(payload, default=str),
             callback=delivery_report,
         )

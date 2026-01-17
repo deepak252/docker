@@ -7,7 +7,7 @@ import time
 
 logger = get_logger(__name__)
 
-BATCH_SIZE = 1000
+BATCH_SIZE = 10000
 POLL_TIMEOUT = 1.0
 FLUSH_INTERVAL = 5  # seconds
 MAX_RETRIES = 5
@@ -64,7 +64,7 @@ class KafkaConsumer:
 
     def _flush(self):
         logger.info("Flushing batch | size=%d", len(self.buffer))
-
+        start_time = time.perf_counter()  # <<< start timer
         try:
             records_by_writer = {}
 
@@ -80,9 +80,12 @@ class KafkaConsumer:
             # commit offsets AFTER successful DB write
             self.consumer.commit(asynchronous=False)
 
+            time_taken = time.perf_counter() - start_time  # <<< calculate flush time
+
             logger.info(
-                "Batch processed successfully | count=%d",
-                len(self.buffer)
+                "Batch processed successfully | count=%d | time_taken=%.4f sec",
+                len(self.buffer),
+                time_taken
             )
 
             self.buffer.clear()

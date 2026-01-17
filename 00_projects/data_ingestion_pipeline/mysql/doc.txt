@@ -10,6 +10,15 @@ Run:
 2. Producer:
     > cd producer
     > uvicorn app.main:app --host 0.0.0.0 --port 8084
+    > uvicorn app.main:app --host 0.0.0.0 --port 8084 --workers 4
 3. Consumer:
     > cd consumer
     > python -m app.main
+
+Reset table, eg.:
+    > delete from panelists;
+    > alter table panelists auto_increment = 1;
+
+DB Disk Usage:
+    > docker inspect <mysql container id>
+    > sudo du -sh /var/lib/docker/volumes/mysql_mysql_ingest_data/_data

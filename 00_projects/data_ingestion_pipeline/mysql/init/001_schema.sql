@@ -19,7 +19,7 @@ CREATE TABLE countries (
 -- =========================
 CREATE TABLE media_channels (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL UNIQUE,
   type VARCHAR(50),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
