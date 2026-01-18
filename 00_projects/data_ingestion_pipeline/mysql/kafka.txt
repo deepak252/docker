@@ -3,25 +3,29 @@ Navigate inside container:
 > cd /opt/kafka/bin
 
 ## Create all Topics
-kafka-topics.sh --create --topic cscan.country.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
-kafka-topics.sh --create --topic cscan.mchannel.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
-kafka-topics.sh --create --topic cscan.company.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
-kafka-topics.sh --create --topic cscan.product.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
-kafka-topics.sh --create --topic cscan.productmedia.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
+./kafka-topics.sh --create --topic cscan.country.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
+./kafka-topics.sh --create --topic cscan.mchannel.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
+./kafka-topics.sh --create --topic cscan.company.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
+./kafka-topics.sh --create --topic cscan.product.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
+./kafka-topics.sh --create --topic cscan.productmedia.created.v1 --partitions 40 --replication-factor 1 --bootstrap-server localhost:9092;
 
-kafka-topics.sh --describe --topic cscan.country.created.v1 --bootstrap-server localhost:9092
-kafka-topics.sh --delete --topic cscan.mchannel.created.v1 --bootstrap-server localhost:9092
+./kafka-topics.sh --describe --topic cscan.country.created.v1 --bootstrap-server localhost:9092
+./kafka-topics.sh --delete --topic cscan.mchannel.created.v1 --bootstrap-server localhost:9092
 
 
 ## Start Consumer
-kafka-console-consumer.sh --topic cscan.company.created.v1 --from-beginning --bootstrap-server localhost:9092
+./kafka-console-consumer.sh --topic cscan.company.created.v1 --from-beginning --bootstrap-server localhost:9092
+./kafka-console-consumer.sh --topic cscan.company.created.v1 --from-beginning --bootstrap-server localhost:9092
 
 ## Start Consumer with Consumer Group
-kafka-console-consumer.sh   --topic cscan.country.created.v1   --from-beginning   --group data-ingestion-service   --bootstrap-server localhost:9092
+./kafka-console-consumer.sh   --topic cscan.country.created.v1   --from-beginning   --group data-ingestion-service   --bootstrap-server localhost:9092
 
 ## Delete a Consumer Group
-kafka-consumer-groups.sh --delete --group data-ingestion-service --bootstrap-server localhost:9092
+./kafka-consumer-groups.sh --delete --group data-ingestion-service --bootstrap-server localhost:9092
 
 # Check Active Consumers in a Consumer Group
-kafka-consumer-groups.sh --describe --group data-ingestion-service --bootstrap-server localhost:9092
+./kafka-consumer-groups.sh --describe --group data-ingestion-service --bootstrap-server localhost:9092
 If you see CONSUMER-ID, HOST, CLIENT-ID → group is active.
+
+
+./kafka-topics.sh --describe --topic cscan.company.created.v1 --bootstrap-server localhost:9092
