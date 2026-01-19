@@ -1,0 +1,4 @@
+
+create table countries_copy as select * from countries limit 3;
+
+create table companies_copy as select * from companies limit 100000;

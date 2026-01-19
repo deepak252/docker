@@ -60,39 +60,39 @@ services:
     volumes:
       - kafka_data:/var/lib/kafka/data
   
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:9.2.4
-    container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
-      - xpack.security.enabled=false
-      - xpack.monitoring.collection.enabled=true
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    volumes:
-      - es_data:/usr/share/elasticsearch/data
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    mem_limit: 1g
-    restart: unless-stopped
-    depends_on:
-      - kafka
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:9.2.4
+  #   container_name: elasticsearch
+  #   environment:
+  #     - discovery.type=single-node
+  #     - ES_JAVA_OPTS=-Xms512m -Xmx512m
+  #     - xpack.security.enabled=false
+  #     - xpack.monitoring.collection.enabled=true
+  #   ports:
+  #     - "9200:9200"
+  #     - "9300:9300"
+  #   volumes:
+  #     - es_data:/usr/share/elasticsearch/data
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   mem_limit: 1g
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - kafka
 
-  # ----------------- Kibana -----------------
-  kibana:
-    image: docker.elastic.co/kibana/kibana:9.2.4
-    container_name: kibana
-    environment:
-      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
-    ports:
-      - "5601:5601"
-    depends_on:
-      - elasticsearch
-    restart: unless-stopped
+  # # ----------------- Kibana -----------------
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:9.2.4
+  #   container_name: kibana
+  #   environment:
+  #     ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+  #   ports:
+  #     - "5601:5601"
+  #   depends_on:
+  #     - elasticsearch
+  #   restart: unless-stopped
 
 volumes:
   mysql_ingest_data:

@@ -1,0 +1,19 @@
+
+## Benchmark Copying Table:
+select count(*) from companies;
+create table companies_copy as select * from companies limit 1000000;
+select * from companies limit 10;
+
+
+## Benchmark Alter Table:
+select count(*) from companies;
+alter table companies_copy RENAME COLUMN name to company_name;
+ALTER TABLE companies_copy ADD COLUMN status VARCHAR(20) DEFAULT 'active';
+ALTER TABLE companies_copy DROP COLUMN status;
+update companies set name = 'Price PLC Holdings' where id = 8;
+
+
+## Benchmark Indexes
+create index idx_company_copy_name on companies_copy(name);
+drop index idx_company_copy_name on companies_copy;
+

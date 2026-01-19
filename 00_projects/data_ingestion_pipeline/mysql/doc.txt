@@ -3,7 +3,13 @@ Reset table, eg.:
     > alter table panelists auto_increment = 1;
 
 DB Disk Usage:
-    > sudo du -sh /var/lib/docker/volumes/mysql_mysql_data/_data
+    > sudo du -sh /var/lib/docker/volumes/mysql_mysql_ingest_data/_data
+
+DB Files:
+    > du -sh /var/lib/mysql/*
+
+Database Table Sizes
+    > SELECT  table_schema AS database_name,     table_name,     ROUND((data_length + index_length) / 1024 / 1024, 2) AS size_mb FROM information_schema.tables where table_schema = 'productsdb';
 
 Run:
 1. docker compose up
