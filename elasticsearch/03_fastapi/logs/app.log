@@ -1,0 +1,34 @@
+2026-01-28 01:25:35,994 | INFO | app.main | Application startup initiated
+2026-01-28 01:25:36,021 | INFO | elastic_transport.transport | GET http://localhost:9200/ [status:200 duration:0.023s]
+2026-01-28 01:25:36,022 | INFO | app.core.elasticsearch | Connected to Elasticsearch
+2026-01-28 01:25:36,024 | INFO | elastic_transport.transport | HEAD http://localhost:9200/products [status:404 duration:0.002s]
+2026-01-28 01:25:37,672 | INFO | elastic_transport.transport | PUT http://localhost:9200/products [status:200 duration:1.647s]
+2026-01-28 01:25:37,674 | INFO | app.main | Application startup completed
+2026-01-28 01:26:59,012 | INFO | app.main | Application shutdown initiated
+2026-01-28 01:26:59,013 | INFO | app.core.elasticsearch | Elasticsearch connection closed
+2026-01-28 01:26:59,013 | INFO | app.main | Application shutdown completed
+2026-01-28 01:27:01,783 | INFO | app.main | Application startup initiated
+2026-01-28 01:27:01,790 | INFO | elastic_transport.transport | GET http://localhost:9200/ [status:200 duration:0.005s]
+2026-01-28 01:27:01,791 | INFO | app.core.elasticsearch | Connected to Elasticsearch
+2026-01-28 01:27:01,794 | INFO | elastic_transport.transport | HEAD http://localhost:9200/products [status:200 duration:0.002s]
+2026-01-28 01:27:01,794 | INFO | app.main | Application startup completed
+2026-01-28 01:27:03,823 | INFO | app.main | Application startup initiated
+2026-01-28 01:27:03,831 | INFO | elastic_transport.transport | GET http://localhost:9200/ [status:200 duration:0.007s]
+2026-01-28 01:27:03,832 | INFO | app.core.elasticsearch | Connected to Elasticsearch
+2026-01-28 01:27:03,834 | INFO | elastic_transport.transport | HEAD http://localhost:9200/products [status:200 duration:0.002s]
+2026-01-28 01:27:03,835 | INFO | app.main | Application startup completed
+2026-01-28 01:27:07,049 | INFO | app.main | Application shutdown initiated
+2026-01-28 01:27:07,050 | INFO | app.core.elasticsearch | Elasticsearch connection closed
+2026-01-28 01:27:07,051 | INFO | app.main | Application shutdown completed
+2026-01-28 01:27:08,231 | INFO | app.main | Application startup initiated
+2026-01-28 01:27:08,238 | INFO | elastic_transport.transport | GET http://localhost:9200/ [status:200 duration:0.006s]
+2026-01-28 01:27:08,239 | INFO | app.core.elasticsearch | Connected to Elasticsearch
+2026-01-28 01:27:08,241 | INFO | elastic_transport.transport | HEAD http://localhost:9200/products [status:200 duration:0.002s]
+2026-01-28 01:27:08,241 | INFO | app.main | Application startup completed
+2026-01-28 01:27:32,753 | INFO | app.main | GET /elasticsearch status=404 time=0.001s
+2026-01-28 01:27:32,845 | INFO | app.main | GET /favicon.ico status=404 time=0.000s
+2026-01-28 01:27:58,730 | INFO | elastic_transport.transport | GET http://localhost:9200/_cluster/health [status:200 duration:0.004s]
+2026-01-28 01:27:58,731 | INFO | app.main | GET /health/elasticsearch status=200 time=0.012s
+2026-01-28 01:28:16,939 | INFO | app.main | Application shutdown initiated
+2026-01-28 01:28:16,940 | INFO | app.core.elasticsearch | Elasticsearch connection closed
+2026-01-28 01:28:16,940 | INFO | app.main | Application shutdown completed
