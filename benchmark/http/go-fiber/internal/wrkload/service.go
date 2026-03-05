@@ -22,8 +22,11 @@ func NewWrkLoadService() WrkloadService {
 
 func (s *wrkloadService)Wrk(ctx context.Context, apiData *ApiData, connections uint, duration uint) (*WrkResult, error) {
 	
-	var wg sync.WaitGroup
+	var wgWorker sync.WaitGroup
 	var mu sync.Mutex
+	chStatusCodes := make(chan int)
+	successCodes := make(map[int]int)
+	failureCodes := make(map[int]int)
 	totalHits, failureHits := 0, 0
 	start := time.Now()
 	
@@ -35,12 +38,23 @@ func (s *wrkloadService)Wrk(ctx context.Context, apiData *ApiData, connections u
 	defer cancel()
 
 	for range connections {
-		wg.Go(func() {
-			Worker(ctx, &client, apiData, &totalHits, &failureHits, &mu)
+		wgWorker.Go(func() {
+			Worker(ctx, &client, apiData, &totalHits, &failureHits, &mu, chStatusCodes)
 		})
 	}
 
-	wg.Wait()
+	go func() {
+		wgWorker.Wait()
+		close(chStatusCodes)
+	}()
+
+	for code := range chStatusCodes {
+		if code <= 299 {
+			successCodes[code]++
+		} else {
+			failureCodes[code]++
+		}
+	}
 
 	return &WrkResult{
 		Url: apiData.Url,
@@ -50,11 +64,13 @@ func (s *wrkloadService)Wrk(ctx context.Context, apiData *ApiData, connections u
 		TotalHits: totalHits,
 		SuccessHits: totalHits - failureHits,
 		FailureHits: failureHits,
+		SuccessMessages: successCodes,
+		FailureMessages: failureCodes,
 	}, nil
 
 }
 
-func Worker(ctx context.Context, client *http.Client, apiData *ApiData, totalHits *int, failureHits *int, mu *sync.Mutex) {
+func Worker(ctx context.Context, client *http.Client, apiData *ApiData, totalHits *int, failureHits *int, mu *sync.Mutex, chStatusCodes chan<- int) {
 	cntTotal, cntFailed := 0, 0
 	for {
 		select {
@@ -66,6 +82,9 @@ func Worker(ctx context.Context, client *http.Client, apiData *ApiData, totalHit
 			return
 		default:
 			resp, err := client.Get(apiData.Url)
+			if resp != nil {
+				chStatusCodes <- resp.StatusCode
+			}
 			cntTotal++
 			if err != nil {
 				cntFailed++
