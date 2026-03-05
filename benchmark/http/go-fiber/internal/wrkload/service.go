@@ -31,7 +31,12 @@ func (s *wrkloadService)Wrk(ctx context.Context, apiData *ApiData, connections u
 	start := time.Now()
 	
 	client := http.Client{
-		Timeout: 1*time.Second,
+		Timeout: 2 * time.Second,
+		Transport: &http.Transport{
+			MaxIdleConns:        1000,
+			MaxIdleConnsPerHost: int(connections),
+			IdleConnTimeout:     90 * time.Second,
+		},
 	}
 
 	ctx, cancel := context.WithTimeout(ctx, time.Duration(duration)*time.Second)
@@ -89,6 +94,9 @@ func Worker(ctx context.Context, client *http.Client, apiData *ApiData, totalHit
 			if err != nil {
 				cntFailed++
 			} else {
+				if resp.StatusCode >= 400 {
+					cntFailed++
+				}
 				resp.Body.Close()
 			}
 		}

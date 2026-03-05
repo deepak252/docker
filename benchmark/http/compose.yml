@@ -1,0 +1,27 @@
+services:
+  gofiber:
+    build: ./go-fiber
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 256M
+        reservations:
+          cpus: "0.5"
+          memory: 128M
+
+  fastapi-api:
+    build: ./fastapi
+    ports:
+      - "8081:8081"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 256M
+        reservations:
+          cpus: "0.5"
+          memory: 128M
+  

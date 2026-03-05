@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Query, HTTPException
-from models import ApiData
-from service import WrkloadService
+from app.models import ApiData
+from app.service import WrkloadService
 
 router = APIRouter()
 service = WrkloadService()

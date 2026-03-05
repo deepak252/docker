@@ -3,7 +3,7 @@ import time
 from typing import Dict
 import httpx
 
-from models import ApiData, WrkResult
+from app.models import ApiData, WrkResult
 
 
 class WrkloadService:
@@ -39,7 +39,6 @@ class WrkloadService:
                         response = await client.get(api_data.url)
 
                         status_code = response.status_code
-                        print(response.text)
 
                         async with lock:
                             if status_code <= 299:
