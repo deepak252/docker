@@ -1,0 +1,47 @@
+Project Structure:
+
+    app/
+    │
+    ├── core/                         # Core application configurations and shared infrastructure
+    │   ├── config.py                 # Environment variables, settings (DATABASE_URL, secrets)
+    │   ├── database.py               # SQLAlchemy engine, session, Base class
+    │   └── dependencies.py           # Dependency Injection providers for services and DB
+    │
+    ├── api/                          # All HTTP/API route definitions
+    │   ├── v1/                       # API versioning (v1)
+    │   │   ├── routes/               # URL route handlers (controllers)
+    │   │   │   ├── users.py          # Endpoints for User module (CRUD APIs)
+    │   │   │   └── products.py       # Endpoints for Product module (CRUD APIs)
+    │   │   └── __init__.py           # Makes v1 a Python package
+    │   └── __init__.py               # Makes api a Python package
+    │
+    ├── models/                       # SQLAlchemy ORM models (database tables)
+    │   ├── user.py                   # User table model
+    │   ├── product.py                # Product table model
+    │   └── __init__.py               # Makes models a Python package
+    │
+    ├── schemas/                      # Pydantic schemas (request/response models)
+    │   ├── user.py                   # UserCreate, UserResponse DTOs
+    │   ├── product.py                # ProductCreate, ProductResponse DTOs
+    │   └── __init__.py               # Makes schemas a Python package
+    │
+    ├── repositories/                 # Repository Layer: DB operations separated from business logic
+    │   ├── user_repository.py        # DB queries for users (create, get, list, etc.)
+    │   ├── product_repository.py     # DB queries for products
+    │   └── __init__.py               # Makes repositories a Python package
+    │
+    ├── services/                     # Business logic layer (service classes)
+    │   ├── user_service.py           # User service: validation, orchestration, business rules
+    │   ├── product_service.py        # Product service: business logic for products
+    │   └── __init__.py               # Makes services a Python package
+    │
+    ├── utils/                        # Utility helpers (shared functions used across the project)
+    │   ├── logger.py                 # Logger configurations (info, debug logs)
+    │   └── hashing.py                # Hashing utilities (sha256, etc.)
+    │
+    ├── main.py                       # FastAPI application startup (app instance, routes)
+    └── requirements.txt              # Python dependencies list (FastAPI, SQLAlchemy, etc.)
+
+
+Steps:
+    config, database, (utils),  model, schema, repository, service, route, main

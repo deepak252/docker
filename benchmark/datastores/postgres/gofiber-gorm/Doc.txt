@@ -1,0 +1,4 @@
+Step 1: Setup and Dependencies
+    > go get github.com/gofiber/fiber/v3
+    > go get gorm.io/gorm
+    > go get gorm.io/driver/postgres

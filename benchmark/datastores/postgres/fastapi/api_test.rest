@@ -1,0 +1,28 @@
+@baseUrl = http://10.49.213.177:8084
+
+###
+
+GET {{baseUrl}}
+
+###
+
+
+GET {{baseUrl}}/users
+
+###
+
+
+GET {{baseUrl}}/users/1
+
+###
+
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "name": "Deepak",
+    "email": "deepak1@gmail.com"
+}
+
+###
+

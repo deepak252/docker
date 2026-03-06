@@ -1,0 +1,12 @@
+> docker network create monitoring
+> docker network inspect monitoring
+> docker compose -f compose.monitoring.yml up -d
+> docker compose -f compose.yml up -d
+
+
+wrk -t4 -c10 -d10s http://localhost:8082/books/1
+wrk -t4 -c10 -d20s http://localhost:8082/books-static/1
+wrk -t4 -c10 -d20s http://localhost:8083/books-static/1
+
+wrk -t4 -c10 -d20s http://localhost:8082/books/2
+wrk -t4 -c10 -d20s http://localhost:8083/books/2
