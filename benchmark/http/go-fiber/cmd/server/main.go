@@ -3,6 +3,7 @@ package main
 import (
 	"benchmark-go-http/internal/config"
 	"benchmark-go-http/internal/health"
+	"benchmark-go-http/internal/ps"
 	"benchmark-go-http/internal/wrkload"
 	"log"
 
@@ -17,6 +18,10 @@ func main() {
 	healthService := health.NewHealthService()
 	healthHandler := health.NewHealthHandler(healthService)
 	healthHandler.RegisterRoutes(app)
+
+	psService := ps.NewPSService()
+	psHandler := ps.NewPSHandler(psService)
+	psHandler.RegisterRoutes(app)
 
 	wrkloadService := wrkload.NewWrkLoadService()
 	wrkloadHandler := wrkload.NewWrkloadHandler(wrkloadService)

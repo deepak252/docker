@@ -87,16 +87,12 @@ func Worker(ctx context.Context, client *http.Client, apiData *ApiData, totalHit
 			return
 		default:
 			resp, err := client.Get(apiData.Url)
+			cntTotal++
+			if err != nil || ( resp != nil && resp.StatusCode >= 400) {
+				cntFailed++
+			}
 			if resp != nil {
 				chStatusCodes <- resp.StatusCode
-			}
-			cntTotal++
-			if err != nil {
-				cntFailed++
-			} else {
-				if resp.StatusCode >= 400 {
-					cntFailed++
-				}
 				resp.Body.Close()
 			}
 		}

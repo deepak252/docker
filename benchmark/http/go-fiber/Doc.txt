@@ -1,0 +1,12 @@
+wrk -t4 -c5 -d5s https://google.com
+wrk -t1 -c5 -d5s https://google.com
+
+
+Push to Docker
+> docker login -u wrkgo
+> docker build -t wrkgo/wrk-go:latest .
+> docker push wrkgo/wrk-go:latest
+
+docker.io/wrkgo/wrk-go:latest
+https://wrk-go-latest-tdxm.onrender.com/health
+https://wrk-go-alive.wrk-go.workers.dev/
